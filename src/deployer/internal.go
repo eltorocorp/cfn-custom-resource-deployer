@@ -22,6 +22,8 @@ func validateResourceNameFormats(resources []customresources.CustomResource) err
 			return fmt.Errorf("resource name %v contains illegal characters", resourceName)
 		}
 	}
+
+	return nil
 }
 
 func checkForDuplicateNames(resources []customresources.CustomResource) error {

@@ -34,5 +34,5 @@ func New(registeredResources []customresources.CustomResource) (*API, error) {
 // If the deployment action fails, the method will attempt to report failure back to CloudFormation
 // and will also return an error to the caller.
 func (a *API) DeployCustomResource(request *cfnhelper.Request) error {
-
+	panic("not implemented")
 }

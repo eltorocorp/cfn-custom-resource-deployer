@@ -1,6 +1,8 @@
 package deployer
 
 import (
+	"fmt"
+
 	"github.com/eltorocorp/cfn-custom-resource-deployer/src/customresources"
 	"github.com/eltorocorp/cfn-response/cfnhelper"
 )
@@ -34,5 +36,50 @@ func New(registeredResources []customresources.CustomResource) (*API, error) {
 // If the deployment action fails, the method will attempt to report failure back to CloudFormation
 // and will also return an error to the caller.
 func (a *API) DeployCustomResource(request *cfnhelper.Request) error {
-	panic("not implemented")
+	var resource customresources.CustomResource
+	for _, registeredResource := range a.registeredResources {
+		if *registeredResource.ResourceName() == *request.ResourceType {
+			resource = registeredResource
+		}
+	}
+	if resource == nil {
+		return fmt.Errorf("requested resource '%v' has not been registered with the deployer", *request.ResourceType)
+	}
+
+	var action func()
+	switch *request.RequestType {
+	case cfnhelper.RequestTypeCreate:
+		action = resource.Create
+	case cfnhelper.RequestTypeUpdate:
+		action = resource.Update
+	case cfnhelper.RequestTypeDelete:
+		action = resource.Delete
+	}
+	action()
+
+	response := cfnhelper.Response{
+		PhysicalResourceID: request.PhysicalResourceID,
+		StackID:            request.StackID,
+		LogicalResourceID:  request.LogicalResourceID,
+		NoEcho:             resource.NoEcho(),
+		Data:               resource.Data(),
+	}
+
+	if resource.ActionWasSuccessful() == nil {
+		response.Status = statusPtr(cfnhelper.ResponseStatusFailed)
+		response.Reason = stringPtr("Custom resource failed report success or failure.")
+	}
+
+	if *resource.ActionWasSuccessful() == false {
+		response.Status = statusPtr(cfnhelper.ResponseStatusFailed)
+		response.Reason = resource.Reason()
+	}
+
+	if *resource.ActionWasSuccessful() == false {
+		response.Status = statusPtr(cfnhelper.ResponseStatusSuccess)
+	}
+
+	_, err := request.SendResponse(&response)
+
+	return err
 }

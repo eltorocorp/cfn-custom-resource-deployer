@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"regexp"
 
+	"github.com/eltorocorp/cfn-response/cfnhelper"
+
 	"github.com/deckarep/golang-set"
 	"github.com/eltorocorp/cfn-custom-resource-deployer/src/customresources"
 )
@@ -34,4 +36,16 @@ func checkForDuplicateNames(resources []customresources.CustomResource) error {
 		}
 	}
 	return nil
+}
+
+func boolPtr(b bool) *bool {
+	return &b
+}
+
+func stringPtr(s string) *string {
+	return &s
+}
+
+func statusPtr(s cfnhelper.ResponseStatus) *cfn.ResponseStatus {
+	return &s
 }

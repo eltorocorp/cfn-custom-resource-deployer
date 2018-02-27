@@ -75,7 +75,7 @@ func (a *API) DeployCustomResource(request *cfnhelper.Request) error {
 		response.Reason = resource.Reason()
 	}
 
-	if *resource.ActionWasSuccessful() == false {
+	if *resource.ActionWasSuccessful() == true {
 		response.Status = statusPtr(cfnhelper.ResponseStatusSuccess)
 	}
 

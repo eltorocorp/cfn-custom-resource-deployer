@@ -38,10 +38,6 @@ func checkForDuplicateNames(resources []customresources.CustomResource) error {
 	return nil
 }
 
-func boolPtr(b bool) *bool {
-	return &b
-}
-
 func stringPtr(s string) *string {
 	return &s
 }

@@ -18,9 +18,9 @@ func Test_New_DuplicatesFound_ReturnsError(t *testing.T) {
 
 	duplicatedName := "Custom::DuplicatedName"
 	resourceOne := mock_customresources.NewMockCustomResource(controller)
-	resourceOne.EXPECT().GetResourceName().Return(duplicatedName).AnyTimes()
+	resourceOne.EXPECT().ResourceName().Return(&duplicatedName).AnyTimes()
 	resourceTwo := mock_customresources.NewMockCustomResource(controller)
-	resourceTwo.EXPECT().GetResourceName().Return(duplicatedName).AnyTimes()
+	resourceTwo.EXPECT().ResourceName().Return(&duplicatedName).AnyTimes()
 
 	customresources := []customresources.CustomResource{
 		resourceOne,
@@ -45,7 +45,7 @@ func Test_New_InvalidResourceNameFound_ReturnsError(t *testing.T) {
 
 	invalidName := "Custom::Invalid::Name"
 	resource := mock_customresources.NewMockCustomResource(controller)
-	resource.EXPECT().GetResourceName().Return(invalidName).AnyTimes()
+	resource.EXPECT().ResourceName().Return(&invalidName).AnyTimes()
 
 	customresources := []customresources.CustomResource{resource}
 	_, err := deployer.New(customresources)

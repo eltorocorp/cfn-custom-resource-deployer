@@ -16,12 +16,12 @@ func validateResourceNameFormats(resources []customresources.CustomResource) err
 	// must not be Custom:: followed by anything containing non-word characters
 	mustNotMatchThis := regexp.MustCompile(`^(Custom::).*\W`)
 	for _, resource := range resources {
-		resourceName := resource.GetResourceName()
-		if mustMatchThis.FindStringIndex(resourceName) == nil {
-			return fmt.Errorf("resource %v has an invalid name", resourceName)
+		resourceName := resource.ResourceName()
+		if mustMatchThis.FindStringIndex(*resourceName) == nil {
+			return fmt.Errorf("resource %v has an invalid name", *resourceName)
 		}
-		if mustNotMatchThis.FindStringIndex(resourceName) != nil {
-			return fmt.Errorf("resource name %v contains illegal characters", resourceName)
+		if mustNotMatchThis.FindStringIndex(*resourceName) != nil {
+			return fmt.Errorf("resource name %v contains illegal characters", *resourceName)
 		}
 	}
 
@@ -31,8 +31,8 @@ func validateResourceNameFormats(resources []customresources.CustomResource) err
 func checkForDuplicateNames(resources []customresources.CustomResource) error {
 	resourceNames := mapset.NewSet()
 	for _, resource := range resources {
-		if resourceNames.Add(resource.GetResourceName()) == false {
-			return fmt.Errorf("resource %v was registered more than once", resource.GetResourceName())
+		if resourceNames.Add(resource.ResourceName()) == false {
+			return fmt.Errorf("resource %v was registered more than once", resource.ResourceName())
 		}
 	}
 	return nil
@@ -46,6 +46,6 @@ func stringPtr(s string) *string {
 	return &s
 }
 
-func statusPtr(s cfnhelper.ResponseStatus) *cfn.ResponseStatus {
+func statusPtr(s cfnhelper.ResponseStatus) *cfnhelper.ResponseStatus {
 	return &s
 }

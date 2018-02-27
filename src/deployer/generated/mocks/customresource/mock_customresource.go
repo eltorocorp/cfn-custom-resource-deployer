@@ -32,11 +32,21 @@ func (m *MockCustomResource) EXPECT() *MockCustomResourceMockRecorder {
 	return m.recorder
 }
 
-// Create mocks base method
-func (m *MockCustomResource) Create() error {
-	ret := m.ctrl.Call(m, "Create")
-	ret0, _ := ret[0].(error)
+// ActionWasSuccessful mocks base method
+func (m *MockCustomResource) ActionWasSuccessful() *bool {
+	ret := m.ctrl.Call(m, "ActionWasSuccessful")
+	ret0, _ := ret[0].(*bool)
 	return ret0
+}
+
+// ActionWasSuccessful indicates an expected call of ActionWasSuccessful
+func (mr *MockCustomResourceMockRecorder) ActionWasSuccessful() *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ActionWasSuccessful", reflect.TypeOf((*MockCustomResource)(nil).ActionWasSuccessful))
+}
+
+// Create mocks base method
+func (m *MockCustomResource) Create() {
+	m.ctrl.Call(m, "Create")
 }
 
 // Create indicates an expected call of Create
@@ -44,11 +54,21 @@ func (mr *MockCustomResourceMockRecorder) Create() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockCustomResource)(nil).Create))
 }
 
-// Delete mocks base method
-func (m *MockCustomResource) Delete() error {
-	ret := m.ctrl.Call(m, "Delete")
-	ret0, _ := ret[0].(error)
+// Data mocks base method
+func (m *MockCustomResource) Data() *interface{} {
+	ret := m.ctrl.Call(m, "Data")
+	ret0, _ := ret[0].(*interface{})
 	return ret0
+}
+
+// Data indicates an expected call of Data
+func (mr *MockCustomResourceMockRecorder) Data() *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Data", reflect.TypeOf((*MockCustomResource)(nil).Data))
+}
+
+// Delete mocks base method
+func (m *MockCustomResource) Delete() {
+	m.ctrl.Call(m, "Delete")
 }
 
 // Delete indicates an expected call of Delete
@@ -56,23 +76,45 @@ func (mr *MockCustomResourceMockRecorder) Delete() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockCustomResource)(nil).Delete))
 }
 
-// GetResourceName mocks base method
-func (m *MockCustomResource) GetResourceName() string {
-	ret := m.ctrl.Call(m, "GetResourceName")
-	ret0, _ := ret[0].(string)
+// NoEcho mocks base method
+func (m *MockCustomResource) NoEcho() *bool {
+	ret := m.ctrl.Call(m, "NoEcho")
+	ret0, _ := ret[0].(*bool)
 	return ret0
 }
 
-// GetResourceName indicates an expected call of GetResourceName
-func (mr *MockCustomResourceMockRecorder) GetResourceName() *gomock.Call {
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetResourceName", reflect.TypeOf((*MockCustomResource)(nil).GetResourceName))
+// NoEcho indicates an expected call of NoEcho
+func (mr *MockCustomResourceMockRecorder) NoEcho() *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NoEcho", reflect.TypeOf((*MockCustomResource)(nil).NoEcho))
+}
+
+// Reason mocks base method
+func (m *MockCustomResource) Reason() *string {
+	ret := m.ctrl.Call(m, "Reason")
+	ret0, _ := ret[0].(*string)
+	return ret0
+}
+
+// Reason indicates an expected call of Reason
+func (mr *MockCustomResourceMockRecorder) Reason() *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Reason", reflect.TypeOf((*MockCustomResource)(nil).Reason))
+}
+
+// ResourceName mocks base method
+func (m *MockCustomResource) ResourceName() *string {
+	ret := m.ctrl.Call(m, "ResourceName")
+	ret0, _ := ret[0].(*string)
+	return ret0
+}
+
+// ResourceName indicates an expected call of ResourceName
+func (mr *MockCustomResourceMockRecorder) ResourceName() *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResourceName", reflect.TypeOf((*MockCustomResource)(nil).ResourceName))
 }
 
 // Update mocks base method
-func (m *MockCustomResource) Update() error {
-	ret := m.ctrl.Call(m, "Update")
-	ret0, _ := ret[0].(error)
-	return ret0
+func (m *MockCustomResource) Update() {
+	m.ctrl.Call(m, "Update")
 }
 
 // Update indicates an expected call of Update

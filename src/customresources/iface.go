@@ -1,5 +1,9 @@
 package customresources
 
+import (
+	"github.com/eltorocorp/cfn-response/cfnhelper"
+)
+
 // CustomResource is a resource to be managed by the deployer.
 type CustomResource interface {
 	// ActionWasSuccessful returns nil if the Create, Update, or Delete action hasn't been called.
@@ -21,11 +25,11 @@ type CustomResource interface {
 	Data() *interface{}
 
 	// Create is called when CloudFormation wishes to create a new instance of a custom resource.
-	Create()
+	Create(request *cfnhelper.Request)
 
 	// Update is called when CloudFormation wishes to update an existing instance of a custom resource.
-	Update()
+	Update(request *cfnhelper.Request)
 
 	// Delete is called when CloudFormation wishes to delete an existing instance of a custom resrouce.
-	Delete()
+	Delete(request *cfnhelper.Request)
 }

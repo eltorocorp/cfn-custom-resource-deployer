@@ -5,8 +5,10 @@
 package mock_customresources
 
 import (
-	gomock "github.com/golang/mock/gomock"
 	reflect "reflect"
+
+	cfnhelper "github.com/eltorocorp/cfn-response/cfnhelper"
+	gomock "github.com/golang/mock/gomock"
 )
 
 // MockCustomResource is a mock of CustomResource interface
@@ -45,13 +47,13 @@ func (mr *MockCustomResourceMockRecorder) ActionWasSuccessful() *gomock.Call {
 }
 
 // Create mocks base method
-func (m *MockCustomResource) Create() {
-	m.ctrl.Call(m, "Create")
+func (m *MockCustomResource) Create(arg0 *cfnhelper.Request) {
+	m.ctrl.Call(m, "Create", arg0)
 }
 
 // Create indicates an expected call of Create
-func (mr *MockCustomResourceMockRecorder) Create() *gomock.Call {
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockCustomResource)(nil).Create))
+func (mr *MockCustomResourceMockRecorder) Create(arg0 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockCustomResource)(nil).Create), arg0)
 }
 
 // Data mocks base method
@@ -67,13 +69,13 @@ func (mr *MockCustomResourceMockRecorder) Data() *gomock.Call {
 }
 
 // Delete mocks base method
-func (m *MockCustomResource) Delete() {
-	m.ctrl.Call(m, "Delete")
+func (m *MockCustomResource) Delete(arg0 *cfnhelper.Request) {
+	m.ctrl.Call(m, "Delete", arg0)
 }
 
 // Delete indicates an expected call of Delete
-func (mr *MockCustomResourceMockRecorder) Delete() *gomock.Call {
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockCustomResource)(nil).Delete))
+func (mr *MockCustomResourceMockRecorder) Delete(arg0 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockCustomResource)(nil).Delete), arg0)
 }
 
 // NoEcho mocks base method
@@ -113,11 +115,11 @@ func (mr *MockCustomResourceMockRecorder) ResourceName() *gomock.Call {
 }
 
 // Update mocks base method
-func (m *MockCustomResource) Update() {
-	m.ctrl.Call(m, "Update")
+func (m *MockCustomResource) Update(arg0 *cfnhelper.Request) {
+	m.ctrl.Call(m, "Update", arg0)
 }
 
 // Update indicates an expected call of Update
-func (mr *MockCustomResourceMockRecorder) Update() *gomock.Call {
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockCustomResource)(nil).Update))
+func (mr *MockCustomResourceMockRecorder) Update(arg0 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockCustomResource)(nil).Update), arg0)
 }

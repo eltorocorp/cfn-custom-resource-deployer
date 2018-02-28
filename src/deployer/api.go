@@ -46,7 +46,7 @@ func (a *API) DeployCustomResource(request *cfnhelper.Request) error {
 		return fmt.Errorf("requested resource '%v' has not been registered with the deployer", *request.ResourceType)
 	}
 
-	var action func()
+	var action func(request *cfnhelper.Request)
 	switch *request.RequestType {
 	case cfnhelper.RequestTypeCreate:
 		action = resource.Create
@@ -55,7 +55,7 @@ func (a *API) DeployCustomResource(request *cfnhelper.Request) error {
 	case cfnhelper.RequestTypeDelete:
 		action = resource.Delete
 	}
-	action()
+	action(request)
 
 	response := cfnhelper.Response{
 		PhysicalResourceID: request.PhysicalResourceID,
